@@ -16,18 +16,20 @@ Accept: application/json
 
 POST {{ContosoPizza_HostAddress}}/pizza/
 Content-Type: application/json
+
 {
   "name": "Margherita",
-  "price": 8.5
+  "isGlutenFree": false
 }
 
 ###
 PUT {{ContosoPizza_HostAddress}}/pizza/1
 Content-Type: application/json
+
 {
   "id": 1,
   "name": "Pepperoni",
-  "price": 9.5
+  "isGlutenFree": false
 }
 ###
 DELETE {{ContosoPizza_HostAddress}}/pizza/1
