@@ -55,4 +55,15 @@ public class PizzaController : ControllerBase
 
 
     // DELETE action
+    [HttpDelete("{id}")]
+    public ActionResult Delete(int id)
+    {
+        var pizza = PizzaService.Get(id);
+
+        if (pizza is null)
+            return NotFound();
+
+        PizzaService.Delete(id);
+        return NoContent();
+    }
 }
