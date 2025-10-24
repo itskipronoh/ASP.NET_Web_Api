@@ -30,8 +30,16 @@ public class PizzaController : ControllerBase
     }
 
     // POST action
+    [HttpPost]
+    public ActionResult Create(Pizza pizza)
+    {
+        PizzaService.Add(pizza);
+        return CreatedAtAction(nameof(Get), new { id = pizza.Id }, pizza);
+    }
+
 
     // PUT action
+   
 
     // DELETE action
 }
