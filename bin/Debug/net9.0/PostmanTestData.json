@@ -1,0 +1,80 @@
+{
+  "testPizzas": [
+    {
+      "testNumber": 1,
+      "description": "Spicy Italian - Full Example",
+      "data": {
+        "name": "Spicy Italian",
+        "description": "Hot peppers, Italian sausage, jalapeños, and extra spicy marinara sauce",
+        "price": 17.99,
+        "isGlutenFree": false,
+        "size": 2,
+        "toppings": [
+          "Italian Sausage",
+          "Jalapeños",
+          "Hot Peppers",
+          "Red Onions",
+          "Spicy Marinara"
+        ],
+        "imageUrl": "https://example.com/spicy-italian.jpg"
+      }
+    },
+    {
+      "testNumber": 2,
+      "description": "Mediterranean Delight - Vegetarian Option",
+      "data": {
+        "name": "Mediterranean Delight",
+        "description": "Sun-dried tomatoes, feta cheese, olives, and fresh spinach on gluten-free crust",
+        "price": 16.50,
+        "isGlutenFree": true,
+        "size": 1,
+        "toppings": [
+          "Sun-dried Tomatoes",
+          "Feta Cheese",
+          "Kalamata Olives",
+          "Spinach",
+          "Oregano"
+        ],
+        "imageUrl": "https://example.com/mediterranean.jpg"
+      }
+    },
+    {
+      "testNumber": 3,
+      "description": "Truffle Supreme - Premium Pizza",
+      "data": {
+        "name": "Truffle Supreme",
+        "description": "Premium truffle oil, wild mushrooms, prosciutto, and arugula",
+        "price": 24.99,
+        "isGlutenFree": false,
+        "size": 3,
+        "toppings": [
+          "Truffle Oil",
+          "Porcini Mushrooms",
+          "Shiitake Mushrooms",
+          "Prosciutto",
+          "Arugula",
+          "Parmesan Shavings"
+        ],
+        "imageUrl": "https://example.com/truffle-supreme.jpg"
+      }
+    },
+    {
+      "testNumber": 4,
+      "description": "Classic Buffalo Chicken - Minimal Fields",
+      "data": {
+        "name": "Buffalo Chicken",
+        "description": "Spicy buffalo chicken with ranch drizzle and celery",
+        "price": 15.75,
+        "isGlutenFree": false,
+        "size": 2,
+        "toppings": [
+          "Buffalo Chicken",
+          "Ranch Sauce",
+          "Celery",
+          "Blue Cheese Crumbles"
+        ],
+        "imageUrl": "https://example.com/buffalo-chicken.jpg"
+      }
+    }
+  ]
+}
