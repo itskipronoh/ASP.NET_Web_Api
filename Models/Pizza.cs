@@ -22,7 +22,7 @@ public class Pizza
     [Required(ErrorMessage = "Size is required")]
     public PizzaSize Size { get; set; }
     
-    public List<string> Toppings { get; set; } = new List<string>();
+    public List<string>? Toppings { get; set; }
     
     [Url(ErrorMessage = "Invalid image URL format")]
     public string? ImageUrl { get; set; }
