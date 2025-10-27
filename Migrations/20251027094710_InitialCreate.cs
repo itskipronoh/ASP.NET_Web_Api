@@ -25,7 +25,7 @@ namespace ContosoPizza.Migrations
                     Price = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
                     IsGlutenFree = table.Column<bool>(type: "boolean", nullable: false),
                     Size = table.Column<int>(type: "integer", nullable: false),
-                    Toppings = table.Column<List<string>>(type: "text[]", nullable: false),
+                    Toppings = table.Column<List<string>>(type: "jsonb", nullable: true),
                     ImageUrl = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true)
                 },
                 constraints: table =>
@@ -38,12 +38,12 @@ namespace ContosoPizza.Migrations
                 columns: new[] { "Id", "Description", "ImageUrl", "IsGlutenFree", "Name", "Price", "Size", "Toppings" },
                 values: new object[,]
                 {
-                    { 1, "Fresh tomato sauce, mozzarella, and basil", "https://example.com/margherita.jpg", false, "Classic Margherita", 12.99m, 1, new List<string>() },
-                    { 2, "Loaded with pepperoni and extra cheese", "https://example.com/pepperoni.jpg", false, "Pepperoni Deluxe", 15.99m, 2, new List<string>() },
-                    { 3, "Fresh vegetables on a gluten-free crust", "https://example.com/veggie.jpg", true, "Veggie Supreme", 14.99m, 1, new List<string>() },
-                    { 4, "For the carnivores - pepperoni, sausage, bacon, and ham", "https://example.com/meatlover.jpg", false, "Meat Lovers", 18.99m, 2, new List<string>() },
-                    { 5, "Ham and pineapple on a crispy crust", "https://example.com/hawaiian.jpg", false, "Hawaiian Paradise", 13.99m, 0, new List<string>() },
-                    { 6, "Grilled chicken with BBQ sauce and red onions", "https://example.com/bbq-chicken.jpg", false, "BBQ Chicken", 16.99m, 2, new List<string>() }
+                    { 1, "Fresh tomato sauce, mozzarella, and basil", "https://example.com/margherita.jpg", false, "Classic Margherita", 12.99m, 1, null },
+                    { 2, "Loaded with pepperoni and extra cheese", "https://example.com/pepperoni.jpg", false, "Pepperoni Deluxe", 15.99m, 2, null },
+                    { 3, "Fresh vegetables on a gluten-free crust", "https://example.com/veggie.jpg", true, "Veggie Supreme", 14.99m, 1, null },
+                    { 4, "For the carnivores - pepperoni, sausage, bacon, and ham", "https://example.com/meatlover.jpg", false, "Meat Lovers", 18.99m, 2, null },
+                    { 5, "Ham and pineapple on a crispy crust", "https://example.com/hawaiian.jpg", false, "Hawaiian Paradise", 13.99m, 0, null },
+                    { 6, "Grilled chicken with BBQ sauce and red onions", "https://example.com/bbq-chicken.jpg", false, "BBQ Chicken", 16.99m, 2, null }
                 });
         }
 

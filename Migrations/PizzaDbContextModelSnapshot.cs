@@ -53,12 +53,11 @@ namespace ContosoPizza.Migrations
                         .HasColumnType("integer");
 
                     b.PrimitiveCollection<List<string>>("Toppings")
-                        .IsRequired()
-                        .HasColumnType("text[]");
+                        .HasColumnType("jsonb");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Pizzas", (string)null);
+                    b.ToTable("Pizzas");
 
                     b.HasData(
                         new
@@ -69,8 +68,7 @@ namespace ContosoPizza.Migrations
                             IsGlutenFree = false,
                             Name = "Classic Margherita",
                             Price = 12.99m,
-                            Size = 1,
-                            Toppings = new List<string>()
+                            Size = 1
                         },
                         new
                         {
@@ -80,8 +78,7 @@ namespace ContosoPizza.Migrations
                             IsGlutenFree = false,
                             Name = "Pepperoni Deluxe",
                             Price = 15.99m,
-                            Size = 2,
-                            Toppings = new List<string>()
+                            Size = 2
                         },
                         new
                         {
@@ -91,8 +88,7 @@ namespace ContosoPizza.Migrations
                             IsGlutenFree = true,
                             Name = "Veggie Supreme",
                             Price = 14.99m,
-                            Size = 1,
-                            Toppings = new List<string>()
+                            Size = 1
                         },
                         new
                         {
@@ -102,8 +98,7 @@ namespace ContosoPizza.Migrations
                             IsGlutenFree = false,
                             Name = "Meat Lovers",
                             Price = 18.99m,
-                            Size = 2,
-                            Toppings = new List<string>()
+                            Size = 2
                         },
                         new
                         {
@@ -113,8 +108,7 @@ namespace ContosoPizza.Migrations
                             IsGlutenFree = false,
                             Name = "Hawaiian Paradise",
                             Price = 13.99m,
-                            Size = 0,
-                            Toppings = new List<string>()
+                            Size = 0
                         },
                         new
                         {
@@ -124,8 +118,7 @@ namespace ContosoPizza.Migrations
                             IsGlutenFree = false,
                             Name = "BBQ Chicken",
                             Price = 16.99m,
-                            Size = 2,
-                            Toppings = new List<string>()
+                            Size = 2
                         });
                 });
 #pragma warning restore 612, 618
