@@ -1,6 +1,7 @@
 using ContosoPizza.Models;
-using ContosoPizza.Services;
+using ContosoPizza.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ContosoPizza.Controllers;
 
@@ -8,20 +9,25 @@ namespace ContosoPizza.Controllers;
 [Route("[controller]")]
 public class PizzaController : ControllerBase
 {
-    public PizzaController()
+    private readonly PizzaDbContext _context;
+
+    public PizzaController(PizzaDbContext context)
     {
+        _context = context;
     }
 
     // GET all action
     [HttpGet]
-    public ActionResult<List<Pizza>> GetAll() =>
-        PizzaService.GetAll();
+    public async Task<ActionResult<List<Pizza>>> GetAll()
+    {
+        return await _context.Pizzas.ToListAsync();
+    }
 
     // GET by Id action
     [HttpGet("{id}")]
-    public ActionResult<Pizza> Get(int id)
+    public async Task<ActionResult<Pizza>> Get(int id)
     {
-        var pizza = PizzaService.Get(id);
+        var pizza = await _context.Pizzas.FindAsync(id);
 
         if (pizza is null)
             return NotFound();
@@ -31,39 +37,60 @@ public class PizzaController : ControllerBase
 
     // POST action
     [HttpPost]
-    public IActionResult Create(Pizza pizza)
+    public async Task<IActionResult> Create([FromBody] Pizza pizza)
     {
-        PizzaService.Add(pizza);
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        _context.Pizzas.Add(pizza);
+        await _context.SaveChangesAsync();
+        
         return CreatedAtAction(nameof(Get), new { id = pizza.Id }, pizza);
     }
 
-
     // PUT action
     [HttpPut("{id}")]
-    public IActionResult Update(int id, Pizza pizza)
+    public async Task<IActionResult> Update(int id, [FromBody] Pizza pizza)
     {
         if (id != pizza.Id)
-            return BadRequest();
+            return BadRequest("ID mismatch");
 
-        var existingPizza = PizzaService.Get(id);
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var existingPizza = await _context.Pizzas.FindAsync(id);
         if (existingPizza is null)
             return NotFound();
 
-        PizzaService.Update(pizza);
+        // Update properties
+        existingPizza.Name = pizza.Name;
+        existingPizza.Description = pizza.Description;
+        existingPizza.Price = pizza.Price;
+        existingPizza.IsGlutenFree = pizza.IsGlutenFree;
+        existingPizza.Size = pizza.Size;
+        existingPizza.Toppings = pizza.Toppings;
+        existingPizza.ImageUrl = pizza.ImageUrl;
+
+        await _context.SaveChangesAsync();
         return NoContent();
     }
 
-
     // DELETE action
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id)
+    public async Task<IActionResult> Delete(int id)
     {
-        var pizza = PizzaService.Get(id);
+        var pizza = await _context.Pizzas.FindAsync(id);
 
         if (pizza is null)
             return NotFound();
 
-        PizzaService.Delete(id);
+        _context.Pizzas.Remove(pizza);
+        await _context.SaveChangesAsync();
+        
         return NoContent();
     }
 }

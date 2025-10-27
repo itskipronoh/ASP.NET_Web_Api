@@ -1,8 +1,14 @@
 using NSwag.AspNetCore;
+using ContosoPizza.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+// Add PostgreSQL DbContext
+builder.Services.AddDbContext<PizzaDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
