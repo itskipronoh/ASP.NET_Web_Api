@@ -1,30 +1,53 @@
 @ContosoPizza_HostAddress = http://localhost:5252
 
+### ============================================
+### PIZZA API - CRUD Operations
+### ============================================
 
-GET {{ContosoPizza_HostAddress}}/weatherforecast/
+### Get all pizzas
+GET {{ContosoPizza_HostAddress}}/pizza
 Accept: application/json
-###
 
-GET {{ContosoPizza_HostAddress}}/pizza/
-Accept: application/json
-
-###
+### Get pizza by ID (1)
 GET {{ContosoPizza_HostAddress}}/pizza/1
 Accept: application/json
-###
 
+### Get pizza by ID (3)
+GET {{ContosoPizza_HostAddress}}/pizza/3
+Accept: application/json
 
-POST {{ContosoPizza_HostAddress}}/pizza/
+### Get pizza by ID (not found - should return 404)
+GET {{ContosoPizza_HostAddress}}/pizza/999
+Accept: application/json
+
+### Create new pizza - Full model
+POST {{ContosoPizza_HostAddress}}/pizza
 Content-Type: application/json
 
 {
-  "name": "Margherita",
-  "isGlutenFree": false
+  "name": "Four Cheese Delight",
+  "description": "Mozzarella, parmesan, gorgonzola, and ricotta cheeses",
+  "price": 17.99,
+  "isGlutenFree": false,
+  "size": 2,
+  "toppings": ["Mozzarella", "Parmesan", "Gorgonzola", "Ricotta", "Olive Oil"],
+  "imageUrl": "https://example.com/images/four-cheese.jpg"
 }
 
-###
+### Create new pizza - Minimal valid data
+POST {{ContosoPizza_HostAddress}}/pizza
+Content-Type: application/json
 
-POST {{ContosoPizza_HostAddress}}/pizza/
+{
+  "name": "Simple Margherita",
+  "price": 10.99,
+  "isGlutenFree": false,
+  "size": 1,
+  "toppings": ["Tomato", "Cheese"]
+}
+
+### Create new pizza - With validation errors (should fail)
+POST {{ContosoPizza_HostAddress}}/pizza
 Content-Type: application/json
 
 {
@@ -32,35 +55,48 @@ Content-Type: application/json
     "isGlutenFree": false
 }
 
-###
-
+### Update existing pizza (ID 1)
 PUT {{ContosoPizza_HostAddress}}/pizza/1
 Content-Type: application/json
 
 {
   "id": 1,
-  "name": "Pepperoni",
-  "isGlutenFree": false
+  "name": "Classic Margherita (Updated)",
+  "description": "Fresh tomato sauce, premium mozzarella, and Italian basil",
+  "price": 13.99,
+  "isGlutenFree": false,
+  "size": 2,
+  "toppings": ["Tomato Sauce", "Premium Mozzarella", "Basil", "Olive Oil"],
+  "imageUrl": "https://example.com/images/margherita-premium.jpg"
 }
-###
+
+### Update existing pizza (ID 3) - Change to Large size
 PUT {{ContosoPizza_HostAddress}}/pizza/3
 Content-Type: application/json
 
 {
-    "id": 3,
-    "name": "Hawaiian",
-    "isGlutenFree": false
+  "id": 3,
+  "name": "Veggie Supreme (Large)",
+  "description": "Fresh vegetables on a gluten-free crust - now in large size",
+  "price": 16.99,
+  "isGlutenFree": true,
+  "size": 2,
+  "toppings": ["Tomato Sauce", "Mozzarella", "Mushrooms", "Bell Peppers", "Onions", "Olives", "Spinach"],
+  "imageUrl": "https://example.com/images/veggie.jpg"
 }
 
-###
-GET {{ContosoPizza_HostAddress}}/pizza/3
+### Delete pizza (ID 2)
+DELETE {{ContosoPizza_HostAddress}}/pizza/2
 Accept: application/json
 
-###
-
-DELETE {{ContosoPizza_HostAddress}}/pizza/1
-Accept: application/json    
-###
+### Delete pizza (not found - should return 404)
 DELETE {{ContosoPizza_HostAddress}}/pizza/999
 Accept: application/json
-###
+
+### ============================================
+### WEATHER FORECAST (Original Sample)
+### ============================================
+
+### Get weather forecast
+GET {{ContosoPizza_HostAddress}}/weatherforecast
+Accept: application/json
